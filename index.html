@@ -19,6 +19,7 @@
             background-color: #f4f4f9;
             line-height: 1.6;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -49,20 +50,30 @@
             margin-bottom: 2rem;
         }
 
-        /* Link styling */
-        a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
-            border: 2px solid #3498db;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+        /* Navigation container styling */
+        .nav {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
         }
 
-        a:hover {
+        /* Navigation button styling */
+        .nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .nav a:hover {
             background-color: #3498db;
             color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer styling */
@@ -77,7 +88,12 @@
     <div class="container">
         <h1>Welcome to My Site</h1>
         <p>This is a sleek and simple homepage. You can customize it to fit your needs.</p>
-        <p><a href="https://yourlink.com">Learn More</a></p>
+        <div class="nav">
+            <a href="https://example.com/home">Home</a> <!-- Replace with your actual link -->
+            <a href="https://example.com/portfolio">Portfolio</a> <!-- Replace with your actual link -->
+            <a href="https://example.com/contact">Contact</a> <!-- Replace with your actual link -->
+            <a href="https://example.com/weddings">Weddings</a> <!-- Replace with your actual link -->
+        </div>
         <footer>&copy; 2024 Your Name</footer>
     </div>
 </body>
