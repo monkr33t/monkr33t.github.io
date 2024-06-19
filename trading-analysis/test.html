@@ -30,6 +30,70 @@
             background-color: #dff0d8;
         }
     </style>
+    <script>
+        function calculateValues() {
+            // Retrieve input values
+            let accountSize = parseFloat(document.getElementById('accountSize').value);
+            let riskPercent = parseFloat(document.getElementById('riskPercent').value) / 100;
+            let stopLossPrice = parseFloat(document.getElementById('stopLossPrice').value);
+            let stopLossShares = parseFloat(document.getElementById('stopLossShares').value);
+            let stopLossExitFee = parseFloat(document.getElementById('stopLossExitFee').value);
+            let entryPrice = parseFloat(document.getElementById('entryPrice').value);
+            let positionSize = parseFloat(document.getElementById('positionSize').value);
+            let entryFee = parseFloat(document.getElementById('entryFee').value);
+            let profitTarget1Price = parseFloat(document.getElementById('profitTarget1Price').value);
+            let profitTarget1Shares = parseFloat(document.getElementById('profitTarget1Shares').value);
+            let profitTarget1ExitFee = parseFloat(document.getElementById('profitTarget1ExitFee').value);
+            let stopTarget1Price = parseFloat(document.getElementById('stopTarget1Price').value);
+            let stopTarget1Shares = parseFloat(document.getElementById('stopTarget1Shares').value);
+            let stopTarget1ExitFee = parseFloat(document.getElementById('stopTarget1ExitFee').value);
+            let profitTarget2Price = parseFloat(document.getElementById('profitTarget2Price').value);
+            let profitTarget2Shares = parseFloat(document.getElementById('profitTarget2Shares').value);
+            let profitTarget2ExitFee = parseFloat(document.getElementById('profitTarget2ExitFee').value);
+            let profitTarget3Price = parseFloat(document.getElementById('profitTarget3Price').value);
+            let profitTarget3Shares = parseFloat(document.getElementById('profitTarget3Shares').value);
+            let profitTarget3ExitFee = parseFloat(document.getElementById('profitTarget3ExitFee').value);
+            let profitTarget4Price = parseFloat(document.getElementById('profitTarget4Price').value);
+            let profitTarget4Shares = parseFloat(document.getElementById('profitTarget4Shares').value);
+            let profitTarget4ExitFee = parseFloat(document.getElementById('profitTarget4ExitFee').value);
+
+            // Calculations
+            let positionCost = entryPrice * positionSize;
+            let totalFees = entryFee + stopLossExitFee + profitTarget1ExitFee + stopTarget1ExitFee + profitTarget2ExitFee + profitTarget3ExitFee + profitTarget4ExitFee;
+            let breakevenPrice = (positionCost + totalFees) / positionSize;
+            let pnlStopLoss = (stopLossPrice - entryPrice) * stopLossShares - stopLossExitFee;
+            let pnlProfitTarget1 = (profitTarget1Price - entryPrice) * profitTarget1Shares - profitTarget1ExitFee;
+            let pnlStopTarget1 = (stopTarget1Price - profitTarget1Price) * stopTarget1Shares - stopTarget1ExitFee;
+            let pnlProfitTarget2 = (profitTarget2Price - stopTarget1Price) * profitTarget2Shares - profitTarget2ExitFee;
+            let pnlProfitTarget3 = (profitTarget3Price - profitTarget2Price) * profitTarget3Shares - profitTarget3ExitFee;
+            let pnlProfitTarget4 = (profitTarget4Price - profitTarget3Price) * profitTarget4Shares - profitTarget4ExitFee;
+            let percentageAtRisk = (Math.abs(pnlStopLoss) / accountSize) * 100;
+            let riskRewardRatio = (pnlProfitTarget1 + pnlProfitTarget2 + pnlProfitTarget3 + pnlProfitTarget4) / Math.abs(pnlStopLoss);
+            let riskPerTrade = Math.abs(pnlStopLoss);
+            let rewardPerTrade = pnlProfitTarget1 + pnlProfitTarget2 + pnlProfitTarget3 + pnlProfitTarget4;
+            let optimalPositionSize = (accountSize * riskPercent) / (entryPrice - stopLossPrice);
+            let stopLossPercentage = ((entryPrice - stopLossPrice) / entryPrice) * 100;
+            let profitTargetPercentage = ((profitTarget1Price - entryPrice) / entryPrice) * 100;
+
+            // Update HTML with calculated values
+            document.getElementById('positionCost').innerText = positionCost.toFixed(2);
+            document.getElementById('totalFees').innerText = totalFees.toFixed(2);
+            document.getElementById('breakevenPrice').innerText = breakevenPrice.toFixed(2);
+            document.getElementById('pnlStopLoss').innerText = pnlStopLoss.toFixed(2);
+            document.getElementById('pnlProfitTarget1').innerText = pnlProfitTarget1.toFixed(2);
+            document.getElementById('pnlStopTarget1').innerText = pnlStopTarget1.toFixed(2);
+            document.getElementById('pnlProfitTarget2').innerText = pnlProfitTarget2.toFixed(2);
+            document.getElementById('pnlProfitTarget3').innerText = pnlProfitTarget3.toFixed(2);
+            document.getElementById('pnlProfitTarget4').innerText = pnlProfitTarget4.toFixed(2);
+            document.getElementById('percentageAtRisk').innerText = percentageAtRisk.toFixed(2) + '%';
+            document.getElementById('riskRewardRatio').innerText = riskRewardRatio.toFixed(2);
+            document.getElementById('riskPerTrade').innerText = riskPerTrade.toFixed(2);
+            document.getElementById('rewardPerTrade').innerText = rewardPerTrade.toFixed(2);
+            document.getElementById('optimalPositionSize').innerText = optimalPositionSize.toFixed(2);
+            document.getElementById('stopLossPercentage').innerText = stopLossPercentage.toFixed(2) + '%';
+            document.getElementById('profitTargetPercentage').innerText = profitTargetPercentage.toFixed(2) + '%';
+        }
+    </script>
 </head>
 <body>
     <h2>Share Trading Analysis</h2>
@@ -72,93 +136,4 @@
             <td><input type="number" id="entryFee" value="15" step="0.01" oninput="calculateValues()"></td>
         </tr>
         <tr>
-            <td>Profit Target 1 - Price ($)</td>
-            <td><input type="number" id="profitTarget1Price" value="60" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 1 - Amount of Shares Sold</td>
-            <td><input type="number" id="profitTarget1Shares" value="50" step="1" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 1 - Exit Fee ($)</td>
-            <td><input type="number" id="profitTarget1ExitFee" value="10" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Stop Target 1 - Price ($)</td>
-            <td><input type="number" id="stopTarget1Price" value="50" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Stop Target 1 - Amount of Shares Sold</td>
-            <td><input type="number" id="stopTarget1Shares" value="25" step="1" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Stop Target 1 - Exit Fee ($)</td>
-            <td><input type="number" id="stopTarget1ExitFee" value="5" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 2 - Price ($)</td>
-            <td><input type="number" id="profitTarget2Price" value="70" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 2 - Amount of Shares Sold</td>
-            <td><input type="number" id="profitTarget2Shares" value="25" step="1" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 2 - Exit Fee ($)</td>
-            <td><input type="number" id="profitTarget2ExitFee" value="5" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 3 - Price ($)</td>
-            <td><input type="number" id="profitTarget3Price" value="80" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 3 - Amount of Shares Sold</td>
-            <td><input type="number" id="profitTarget3Shares" value="15" step="1" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 3 - Exit Fee ($)</td>
-            <td><input type="number" id="profitTarget3ExitFee" value="5" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 4 - Price ($)</td>
-            <td><input type="number" id="profitTarget4Price" value="90" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 4 - Amount of Shares Sold</td>
-            <td><input type="number" id="profitTarget4Shares" value="10" step="1" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target 4 - Exit Fee ($)</td>
-            <td><input type="number" id="profitTarget4ExitFee" value="5" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-    </table>
-    
-    <!-- Calculated Fields -->
-    <h3>Calculated Metrics</h3>
-    <table>
-        <tr>
-            <th>Metric</th>
-            <th>Value</th>
-        </tr>
-        <tr>
-            <td>Percentage of Account at Risk if Stopped Out</td>
-            <td id="percentageAtRisk">0%</td>
-        </tr>
-        <tr>
-            <td>Risk-Reward Ratio</td>
-            <td id="riskRewardRatio">0</td>
-        </tr>
-        <tr>
-            <td>Risk per Trade ($)</td>
-            <td id="riskPerTrade">0</td>
-        </tr>
-        <tr>
-            <td>Reward per Trade ($)</td>
-            <td id="rewardPerTrade">0</td>
-        </tr>
-        <tr>
-            <td>Optimal Position Size (shares)</td>
-            <td id="optimalPositionSize">0</td>
-        </tr>
-        <tr>
-            <td>Stop Loss
+            <td>Profit Target 1 -
