@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Trading Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        input[type="number"] {
+            width: 150px;
+        }
+        .highlight {
+            background-color: #dff0d8;
+        }
+    </style>
+</head>
+<body>
+    <h2>Share Trading Analysis</h2>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+        </tr>
+        <!-- Input Fields -->
+        <tr>
+            <td>Account Size ($)</td>
+            <td><input type="number" id="accountSize" value="10000" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Risk % of Account Size</td>
+            <td><input type="number" id="riskPercent" value="1" step="0.01" oninput="calculateValues()">%</td>
+        </tr>
+        <tr>
+            <td>Stop Loss Price ($)</td>
+            <td><input type="number" id="stopLossPrice" value="45" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Stop Loss - Amount of Shares Sold</td>
+            <td><input type="number" id="stopLossShares" value="50" step="1" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Stop Loss - Exit Fee ($)</td>
+            <td><input type="number" id="stopLossExitFee" value="10" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Entry Price ($)</td>
+            <td><input type="number" id="entryPrice" value="48" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Position Size (Shares)</td>
+            <td><input type="number" id="positionSize" value="100" step="1" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Entry Fee ($)</td>
+            <td><input type="number" id="entryFee" value="15" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 1 - Price ($)</td>
+            <td><input type="number" id="profitTarget1Price" value="60" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 1 - Amount of Shares Sold</td>
+            <td><input type="number" id="profitTarget1Shares" value="50" step="1" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 1 - Exit Fee ($)</td>
+            <td><input type="number" id="profitTarget1ExitFee" value="10" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Stop Target 1 - Price ($)</td>
+            <td><input type="number" id="stopTarget1Price" value="50" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Stop Target 1 - Amount of Shares Sold</td>
+            <td><input type="number" id="stopTarget1Shares" value="25" step="1" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Stop Target 1 - Exit Fee ($)</td>
+            <td><input type="number" id="stopTarget1ExitFee" value="5" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 2 - Price ($)</td>
+            <td><input type="number" id="profitTarget2Price" value="70" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 2 - Amount of Shares Sold</td>
+            <td><input type="number" id="profitTarget2Shares" value="25" step="1" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 2 - Exit Fee ($)</td>
+            <td><input type="number" id="profitTarget2ExitFee" value="5" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 3 - Price ($)</td>
+            <td><input type="number" id="profitTarget3Price" value="80" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 3 - Amount of Shares Sold</td>
+            <td><input type="number" id="profitTarget3Shares" value="15" step="1" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 3 - Exit Fee ($)</td>
+            <td><input type="number" id="profitTarget3ExitFee" value="5" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 4 - Price ($)</td>
+            <td><input type="number" id="profitTarget4Price" value="90" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 4 - Amount of Shares Sold</td>
+            <td><input type="number" id="profitTarget4Shares" value="10" step="1" oninput="calculateValues()"></td>
+        </tr>
+        <tr>
+            <td>Profit Target 4 - Exit Fee ($)</td>
+            <td><input type="number" id="profitTarget4ExitFee" value="5" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+    </table>
+    
+    <!-- Calculated Fields -->
+    <h3>Calculated Metrics</h3>
+    <table>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>Percentage of Account at Risk if Stopped Out</td>
+            <td id="percentageAtRisk">0%</td>
+        </tr>
+        <tr>
+            <td>Risk-Reward Ratio</td>
+            <td id="riskRewardRatio">0</td>
+        </tr>
+        <tr>
+            <td>Risk per Trade ($)</td>
+            <td id="riskPerTrade">0</td>
+        </tr>
+        <tr>
+            <td>Reward per Trade ($)</td>
+            <td id="rewardPerTrade">0</td>
+        </tr>
+        <tr>
+            <td>Optimal Position Size (shares)</td>
+            <td id="optimalPositionSize">0</td>
+        </tr>
+        <tr>
+            <td>Stop Loss
