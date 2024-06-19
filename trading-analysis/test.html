@@ -133,4 +133,77 @@
         </tr>
         <tr>
             <td>Entry Fee ($)</td>
-            <td><input type="number" id="entryFee" value="15" step="0.
+            <td><input type="number" id="entryFee" value="15" step="0.01" oninput="calculateValues()"></td>
+        </tr>
+        <!-- Additional fields as needed -->
+    </table>
+    <!-- Display Calculated Values -->
+    <h3>Calculated Values</h3>
+    <table>
+        <tr>
+            <td>Position Cost ($)</td>
+            <td id="positionCost">0.00</td>
+        </tr>
+        <tr>
+            <td>Total Fees ($)</td>
+            <td id="totalFees">0.00</td>
+        </tr>
+        <tr>
+            <td>Breakeven Price ($)</td>
+            <td id="breakevenPrice">0.00</td>
+        </tr>
+        <tr>
+            <td>Profit/Loss at Stop Loss ($)</td>
+            <td id="pnlStopLoss">0.00</td>
+        </tr>
+        <tr>
+            <td>Profit/Loss at Profit Target 1 ($)</td>
+            <td id="pnlProfitTarget1">0.00</td>
+        </tr>
+        <tr>
+            <td>Profit/Loss at Stop Target 1 ($)</td>
+            <td id="pnlStopTarget1">0.00</td>
+        </tr>
+        <tr>
+            <td>Profit/Loss at Profit Target 2 ($)</td>
+            <td id="pnlProfitTarget2">0.00</td>
+        </tr>
+        <tr>
+            <td>Profit/Loss at Profit Target 3 ($)</td>
+            <td id="pnlProfitTarget3">0.00</td>
+        </tr>
+        <tr>
+            <td>Profit/Loss at Profit Target 4 ($)</td>
+            <td id="pnlProfitTarget4">0.00</td>
+        </tr>
+        <tr>
+            <td>Percentage at Risk (%)</td>
+            <td id="percentageAtRisk">0.00%</td>
+        </tr>
+        <tr>
+            <td>Risk/Reward Ratio</td>
+            <td id="riskRewardRatio">0.00</td>
+        </tr>
+        <tr>
+            <td>Risk per Trade ($)</td>
+            <td id="riskPerTrade">0.00</td>
+        </tr>
+        <tr>
+            <td>Reward per Trade ($)</td>
+            <td id="rewardPerTrade">0.00</td>
+        </tr>
+        <tr>
+            <td>Optimal Position Size (Shares)</td>
+            <td id="optimalPositionSize">0.00</td>
+        </tr>
+        <tr>
+            <td>Stop Loss Percentage (%)</td>
+            <td id="stopLossPercentage">0.00%</td>
+        </tr>
+        <tr>
+            <td>Profit Target Percentage (%)</td>
+            <td id="profitTargetPercentage">0.00%</td>
+        </tr>
+    </table>
+</body>
+</html>
