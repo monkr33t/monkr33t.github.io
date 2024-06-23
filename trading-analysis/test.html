@@ -38,7 +38,6 @@
             let exitFee = parseFloat(document.getElementById('exitFee').value);
             let accountSize = parseFloat(document.getElementById('accountSize').value);
             let riskPercent = parseFloat(document.getElementById('riskPercent').value) / 100;
-            let leverageFactor = parseFloat(document.getElementById('leverageFactor').value);
 
             // Calculate derived values
             let positionCost = entryPrice * positionSize;
@@ -51,7 +50,6 @@
             let riskPerTrade = Math.abs(pnlStopLoss);
             let rewardPerTrade = pnlProfitTarget;
             let optimalPositionSize = (accountSize * riskPercent) / (entryPrice - stopLossPrice);
-            let adjustedPositionSize = positionSize * leverageFactor;
             let stopLossPercentage = ((entryPrice - stopLossPrice) / entryPrice) * 100;
             let profitTargetPercentage = ((profitTargetPrice - entryPrice) / entryPrice) * 100;
 
@@ -70,7 +68,6 @@
             document.getElementById('riskPerTrade').innerText = riskPerTrade.toFixed(2);
             document.getElementById('rewardPerTrade').innerText = rewardPerTrade.toFixed(2);
             document.getElementById('optimalPositionSize').innerText = optimalPositionSize.toFixed(2);
-            document.getElementById('adjustedPositionSize').innerText = adjustedPositionSize.toFixed(2);
             document.getElementById('stopLossPercentage').innerText = stopLossPercentage.toFixed(2) + '%';
             document.getElementById('profitTargetPercentage').innerText = profitTargetPercentage.toFixed(2) + '%';
             document.getElementById('pnlPercentageStopLoss').innerText = pnlPercentageStopLoss.toFixed(2) + '%';
@@ -118,10 +115,6 @@
             <td><input type="number" id="riskPercent" value="1" step="0.01" oninput="calculateValues()">%</td>
         </tr>
         <tr>
-            <td>Leverage Factor</td>
-            <td><input type="number" id="leverageFactor" value="1" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
             <td><b>Position Cost ($)</b></td>
             <td><b id="positionCost">4800.00</b></td>
         </tr>
@@ -162,10 +155,6 @@
             <td><b id="optimalPositionSize">33.33</b></td>
         </tr>
         <tr>
-            <td><b>Adjusted Position Size with Leverage</b></td>
-            <td><b id="adjustedPositionSize">100.00</b></td>
-        </tr>
-        <tr>
             <td><b>Stop Loss % of Entry</b></td>
             <td><b id="stopLossPercentage">6.25%</b></td>
         </tr>
@@ -174,17 +163,4 @@
             <td><b id="profitTargetPercentage">25.00%</b></td>
         </tr>
         <tr>
-            <td><b>PnL Percentage if Stop Loss Hit (%)</b></td>
-            <td><b id="pnlPercentageStopLoss">-6.88%</b></td>
-        </tr>
-        <tr>
-            <td><b>PnL Percentage if Profit Target Hit (%)</b></td>
-            <td><b id="pnlPercentageProfitTarget">24.38%</b></td>
-        </tr>
-    </table>
-    <script>
-        // Initialize with default values
-        calculateValues();
-    </script>
-</body>
-</html>
+            <td><b>PnL Percentage if Stop Loss
