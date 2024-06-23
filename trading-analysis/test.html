@@ -115,6 +115,22 @@
             <td><input type="number" id="riskPercent" value="1" step="0.01" oninput="calculateValues()">%</td>
         </tr>
         <tr>
+            <td><b>Percentage at Risk if Stopped Out</b></td>
+            <td><b id="percentageAtRisk">3.30%</b></td>
+        </tr>
+        <tr>
+            <td><b>Risk per Trade ($)</b></td>
+            <td><b id="riskPerTrade">330.00</b></td>
+        </tr>
+        <tr>
+            <td><b>Risk-Reward Ratio</b></td>
+            <td><b id="riskRewardRatio">4.00</b></td>
+        </tr>
+        <tr>
+            <td><b>Reward per Trade ($)</b></td>
+            <td><b id="rewardPerTrade">1170.00</b></td>
+        </tr>
+        <tr>
             <td><b>Position Cost ($)</b></td>
             <td><b id="positionCost">4800.00</b></td>
         </tr>
@@ -131,36 +147,33 @@
             <td><b id="pnlStopLoss">-330.00</b></td>
         </tr>
         <tr>
+            <td><b>PnL Percentage if Stop Loss Hit (%)</b></td>
+            <td><b id="pnlPercentageStopLoss">-6.88%</b></td>
+        </tr>
+        <tr>
+            <td><b>Stop Loss % from Entry</b></td>
+            <td><b id="stopLossPercentage">6.25%</b></td>
+        </tr>
+        <tr>
             <td><b>PnL if Profit Target Hit ($)</b></td>
             <td><b id="pnlProfitTarget">1170.00</b></td>
         </tr>
         <tr>
-            <td><b>Risk-Reward Ratio</b></td>
-            <td><b id="riskRewardRatio">4.00</b></td>
+            <td><b>PnL Percentage if Profit Target Hit (%)</b></td>
+            <td><b id="pnlPercentageProfitTarget">24.38%</b></td>
         </tr>
         <tr>
-            <td><b>Percentage at Risk if Stopped Out</b></td>
-            <td><b id="percentageAtRisk">3.30%</b></td>
-        </tr>
-        <tr>
-            <td><b>Risk per Trade ($)</b></td>
-            <td><b id="riskPerTrade">330.00</b></td>
-        </tr>
-        <tr>
-            <td><b>Reward per Trade ($)</b></td>
-            <td><b id="rewardPerTrade">1170.00</b></td>
+            <td><b>Profit Target % from Entry</b></td>
+            <td><b id="profitTargetPercentage">25.00%</b></td>
         </tr>
         <tr>
             <td><b>Optimal Position Size (shares)</b></td>
             <td><b id="optimalPositionSize">33.33</b></td>
         </tr>
-        <tr>
-            <td><b>Stop Loss % of Entry</b></td>
-            <td><b id="stopLossPercentage">6.25%</b></td>
-        </tr>
-        <tr>
-            <td><b>Profit Target % of Entry</b></td>
-            <td><b id="profitTargetPercentage">25.00%</b></td>
-        </tr>
-        <tr>
-            <td><b>PnL Percentage if Stop Loss
+    </table>
+    <script>
+        // Initialize with default values
+        calculateValues();
+    </script>
+</body>
+</html>
