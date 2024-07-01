@@ -16,19 +16,21 @@
             overflow: hidden;
             background-color: #333;
             color: #fff;
+            position: relative;
         }
         .ticker {
             display: inline-block;
             white-space: nowrap;
             padding: 10px 0;
-            animation: ticker 60s linear infinite;
+            animation: ticker 90s linear infinite;
         }
         .ticker div {
             display: inline-block;
             padding: 0 50px;
         }
         @keyframes ticker {
-            0% { transform: translateX(100%); }
+            0% { transform: translateX(50%); }
+            10% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
     </style>
