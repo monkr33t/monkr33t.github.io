@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Quotes Ticker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: #333;
+            color: #fff;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 10px 0;
+            animation: ticker 15s linear infinite;
+        }
+        .ticker div {
+            display: inline-block;
+            padding: 0 50px;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div>"Do not save what is left after spending, but spend what is left after saving." - Warren Buffett</div>
+            <div>"The habit of saving is itself an education; it fosters every virtue, teaches self-denial, cultivates the sense of order, trains to forethought, and so broadens the mind." - T.T. Munger</div>
+            <div>"A penny saved is a penny earned." - Benjamin Franklin</div>
+            <div>"Financial freedom is available to those who learn about it and work for it." - Robert Kiyosaki</div>
+            <div>"Savings, remember, is the prerequisite of investment." - Campbell McConnell</div>
+            <div>"The best time to start thinking about your retirement is before the boss does." - Anonymous</div>
+            <div>"It’s not about having lots of money. It’s knowing how to manage it." - Anonymous</div>
+            <div>"Do something today that your future self will thank you for." - Sean Patrick Flanery</div>
+        </div>
+    </div>
+</body>
+</html>
 
