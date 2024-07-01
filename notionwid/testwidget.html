@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Quotes Ticker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff; /* White background */
+        }
+        .quote-ticker-container {
+            width: 100%;
+            overflow: hidden;
+            background-color: #333; /* Black background for the ticker */
+            color: #fff;
+            padding: 10px 0; /* Adjust padding as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .quote-ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        .quote-ticker div {
+            display: inline-block;
+            padding: 0 50px;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .quote-ticker-copyright {
+            margin-top: 5px;
+            text-align: center;
+            font-size: 12px;
+            color: #333;
+        }
+        .quote-ticker-copyright a {
+            color: #1E90FF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-ticker-container">
+        <div class="quote-ticker">
+            <div>"Do not save what is left after spending, but spend what is left after saving." - Warren Buffett</div>
+            <div>"The habit of saving is itself an education; it fosters every virtue, teaches self-denial, cultivates the sense of order, trains to forethought, and so broadens the mind." - T.T. Munger</div>
+            <div>"A penny saved is a penny earned." - Benjamin Franklin</div>
+            <div>"Financial freedom is available to those who learn about it and work for it." - Robert Kiyosaki</div>
+            <div>"Savings, remember, is the prerequisite of investment." - Campbell McConnell</div>
+            <div>"The best time to start thinking about your retirement is before the boss does." - Anonymous</div>
+            <div>"It’s not about having lots of money. It’s knowing how to manage it." - Anonymous</div>
+            <div>"Do something today that your future self will thank you for." - Sean Patrick Flanery</div>
+        </div>
+    </div>
+    <div class="quote-ticker-copyright">
+        <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a>
+    </div>
+</body>
+</html>
