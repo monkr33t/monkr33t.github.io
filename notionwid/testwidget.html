@@ -25,15 +25,11 @@
         .quote-ticker {
             display: flex;
             white-space: nowrap;
-            animation: ticker 30s linear infinite;
+            animation: ticker linear infinite;
         }
         .quote-ticker div {
             display: inline-block;
             padding: 0 50px;
-        }
-        @keyframes ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
         }
         .quote-ticker-copyright {
             margin-top: 5px;
@@ -63,5 +59,27 @@
     <div class="quote-ticker-copyright">
         <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ticker = document.querySelector(".quote-ticker");
+            const container = document.querySelector(".quote-ticker-container");
+            const speed = 100; // pixels per second
+
+            function calculateDuration() {
+                const tickerWidth = ticker.scrollWidth;
+                const containerWidth = container.clientWidth;
+                const totalDistance = tickerWidth + containerWidth;
+                return totalDistance / speed;
+            }
+
+            function setAnimation() {
+                const duration = calculateDuration();
+                ticker.style.animationDuration = `${duration}s`;
+            }
+
+            setAnimation();
+            window.addEventListener("resize", setAnimation);
+        });
+    </script>
 </body>
 </html>
