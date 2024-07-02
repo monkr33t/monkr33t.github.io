@@ -29,6 +29,17 @@
             text-align: center;
         }
 
+        /* Styling for the container */
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Styling for the input and result sections */
+        .input-section, .result-section {
+            width: 48%;
+        }
+
         /* Styling for the table */
         table {
             width: 100%;
@@ -134,102 +145,115 @@
 </head>
 <body>
     <h2>Position Size and RR Calculator</h2>
-    <!-- Table to display input fields and calculated results -->
-    <table>
-        <tr>
-            <th>Parameter</th>
-            <th>Value</th>
-        </tr>
-        <!-- Input fields for user data -->
-        <tr>
-            <td>Entry Price ($)</td>
-            <td><input type="number" id="entryPrice" value="1" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Position Size (shares)</td>
-            <td><input type="number" id="positionSize" value="1000" step="1" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Stop Loss Price ($)</td>
-            <td><input type="number" id="stopLossPrice" value="0.90" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Profit Target Price ($)</td>
-            <td><input type="number" id="profitTargetPrice" value="1.55" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Entry Fee ($)</td>
-            <td><input type="number" id="entryFee" value="7" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Exit Fee ($)</td>
-            <td><input type="number" id="exitFee" value="7" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Total Account Size ($)</td>
-            <td><input type="number" id="accountSize" value="10000" step="0.01" oninput="calculateValues()"></td>
-        </tr>
-        <tr>
-            <td>Risk % of Account Size</td>
-            <td><input type="number" id="riskPercent" value="1.00" step="0.01" oninput="calculateValues()">%</td>
-        </tr>
-        <!-- Calculated results -->
-        <tr>
-            <td><b>Optimal Position Size (shares)</b></td>
-            <td><b id="optimalPositionSize" class="highlight">860</b></td>
-        </tr>
-        <tr>
-            <td><b>Percentage at Risk if Stopped Out</b></td>
-            <td><b id="percentageAtRisk" class="highlight">1.14%</b></td>
-        </tr>
-        <tr>
-            <td><b>Risk per Trade ($)</b></td>
-            <td><b id="riskPerTrade" class="highlight">114.00</b></td>
-        </tr>
-        <tr>
-            <td><b>Risk-Reward Ratio</b></td>
-            <td><b id="riskRewardRatio">5.50</b></td>
-        </tr>
-        <tr>
-            <td><b>Reward per Trade ($)</b></td>
-            <td><b id="rewardPerTrade">536.00</b></td>
-        </tr>
-        <tr>
-            <td><b>Position Cost ($)</b></td>
-            <td><b id="positionCost">1000.00</b></td>
-        </tr>
-        <tr>
-            <td><b>Total Fees ($)</b></td>
-            <td><b id="totalFees">14.00</b></td>
-        </tr>
-        <tr>
-            <td><b>Breakeven Price ($)</b></td>
-            <td><b id="breakevenPrice">1.01</b></td>
-        </tr>
-        <tr>
-            <td><b>PnL if Stop Loss Hit ($)</b></td>
-            <td><b id="pnlStopLoss">-114.00</b></td>
-        </tr>
-        <tr>
-            <td><b>PnL Percentage if Stop Loss Hit (%)</b></td>
-            <td><b id="pnlPercentageStopLoss">-11.40%</b></td>
-        </tr>
-        <tr>
-            <td><b>Stop Loss % from Entry</b></td>
-            <td><b id="stopLossPercentage">10.00%</b></td>
-        </tr>
-        <tr>
-            <td><b>PnL if Profit Target Hit ($)</b></td>
-            <td><b id="pnlProfitTarget">536.00</b></td>
-        </tr>
-        <tr>
-            <td><b>PnL Percentage if Profit Target Hit (%)</b></td>
-            <td><b id="pnlPercentageProfitTarget">53.60%</b></td>
-        </tr>
-        <tr>
-            <td><b>Profit Target % from Entry</b></td>
-            <td><b id="profitTargetPercentage">55.00%</b></td>
-        </tr>
-    </table>
+    <div class="container">
+        <div class="input-section">
+            <!-- Table to display input fields -->
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Value</th>
+                </tr>
+                <!-- Input fields for user data -->
+                <tr>
+                    <td>Entry Price ($)</td>
+                    <td><input type="number" id="entryPrice" value="1" step="0.01" oninput="calculateValues()"></td>
+                </tr>
+                <tr>
+                    <td>Position Size (shares)</td>
+                    <td><input type="number" id="positionSize" value="1000" step="1" oninput="calculateValues()"></td>
+                </tr>
+                <tr>
+                    <td>Stop Loss Price ($)</td>
+                    <td><input type="number" id="stopLossPrice" value="0.90" step="0.01" oninput="calculateValues()"></td>
+                </tr>
+                <tr>
+                    <td>Profit Target Price ($)</td>
+                    <td><input type="number" id="profitTargetPrice" value="1.55" step="0.01" oninput="calculateValues()"></td>
+                </tr>
+                <tr>
+                    <td>Entry Fee ($)</td>
+                    <td><input type="number" id="entryFee" value="7" step="0.01" oninput="calculateValues()"></td>
+                </tr>
+                <tr>
+                    <td>Exit Fee ($)</td>
+                    <td><input type="number" id="exitFee" value="7" step="0.01" oninput="calculateValues()"></td>
+                </tr>
+                <tr>
+                    <td>Total Account Size ($)</td>
+                    <td><input type="number" id="accountSize" value="10000" step="0.01" oninput="calculateValues()"></td>
+                </tr>
+                <tr>
+                    <td>Risk % of Account Size</td>
+                    <td><input type="number" id="riskPercent" value="1.00" step="0.01" oninput="calculateValues()">%</td>
+                </tr>
+            </table>
+        </div>
+        <div class="result-section">
+            <!-- Table to display calculated results -->
+            <table>
+                <tr>
+                    <th>Calculation</th>
+                    <th>Result</th>
+                </tr>
+                <!-- Calculated results -->
+                <tr>
+                    <td><b>Optimal Position Size (shares)</b></td>
+                    <td><b id="optimalPositionSize" class="highlight">860</b></td>
+                </tr>
+                <tr>
+                    <td><b>Percentage at Risk if Stopped Out</b></td>
+                    <td><b id="percentageAtRisk" class="highlight">1.14%</b></td>
+                </tr>
+                <tr>
+                    <td><b>Risk per Trade ($)</b></td>
+                    <td><b id="riskPerTrade" class="highlight">114.00</b></td>
+                </tr>
+                <tr>
+                    <td><b>Risk-Reward Ratio</b></td>
+                    <td><b id="riskRewardRatio">5.50</b></td>
+                </tr>
+                <tr>
+                    <td><b>Reward per Trade ($)</b></td>
+                    <td><b id="rewardPerTrade">536.00</b></td>
+                </tr>
+                <tr>
+                    <td><b>Position Cost ($)</b></td>
+                    <td><b id="positionCost">1000.00</b></td>
+                </tr>
+                <tr>
+                    <td><b>Total Fees ($)</b></td>
+                    <td><b id="totalFees">14.00</b></td>
+                </tr>
+                <tr>
+                    <td><b>Breakeven Price ($)</b></td>
+                    <td><b id="breakevenPrice">1.01</b></td>
+                </tr>
+                <tr>
+                    <td><b>PnL if Stop Loss Hit ($)</b></td>
+                    <td><b id="pnlStopLoss">-114.00</b></td>
+                </tr>
+                <tr>
+                    <td><b>PnL Percentage if Stop Loss Hit (%)</b></td>
+                    <td><b id="pnlPercentageStopLoss">-11.40%</b></td>
+                </tr>
+                <tr>
+                    <td><b>Stop Loss % from Entry</b></td>
+                    <td><b id="stopLossPercentage">10.00%</b></td>
+                </tr>
+                <tr>
+                    <td><b>PnL if Profit Target Hit ($)</b></td>
+                    <td><b id="pnlProfitTarget">536.00</b></td>
+                </tr>
+                <tr>
+                    <td><b>PnL Percentage if Profit Target Hit (%)</b></td>
+                    <td><b id="pnlPercentageProfitTarget">53.60%</b></td>
+                </tr>
+                <tr>
+                    <td><b>Profit Target % from Entry</b></td>
+                    <td><b id="profitTargetPercentage">55.00%</b></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
