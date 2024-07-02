@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Average Share Price Calculator</title>
+    <title>Average Share Price Calculation</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            color: #337ab7;
+        }
         table {
             width: 80%;
+            margin: 20px auto;
             border-collapse: collapse;
-            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
         }
         th, td {
             padding: 10px;
             text-align: center;
         }
         th {
+            background-color: #337ab7;
+            color: white;
+        }
+        td input {
+            width: 100px;
+            text-align: center;
+        }
+        .result {
             background-color: #f2f2f2;
+            font-weight: bold;
         }
     </style>
     <script>
@@ -45,7 +64,7 @@
 </head>
 <body>
 
-<h2>Average Share Price Calculator</h2>
+<h2>Average Share Price Calculation</h2>
 
 <table>
     <thead>
@@ -86,14 +105,14 @@
             <td><input type="number" id="shares4" value="35" step="1" onchange="calculate()"></td>
             <td><input type="number" id="fees4" value="3" step="0.01" onchange="calculate()"></td>
         </tr>
-        <tr>
+        <tr class="result">
             <td>Total</td>
             <td id="totalCostWithoutFees">$0.00</td>
             <td id="totalCostWithFees">$0.00</td>
             <td id="totalShares">0</td>
             <td></td>
         </tr>
-        <tr>
+        <tr class="result">
             <td>Average Price</td>
             <td colspan="4" id="averagePrice">$0.000</td>
         </tr>
