@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scale Out Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .calculator {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .results {
+            margin-top: 20px;
+        }
+
+        .results p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scale Out Calculator</h1>
+        <div class="calculator">
+            <div class="input-group">
+                <label for="stopLoss">Stop Loss Price:</label>
+                <input type="number" id="stopLoss" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="buyPrice">Buy Price:</label>
+                <input type="number" id="buyPrice" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="numberOfShares">Number of Shares:</label>
+                <input type="number" id="numberOfShares">
+            </div>
+            <div class="input-group">
+                <label for="profitTarget1">Profit Target 1 (%):</label>
+                <input type="number" id="profitTarget1" value="30">
+            </div>
+            <div class="input-group">
+                <label for="priceTarget1">Price Target 1:</label>
+                <input type="number" id="priceTarget1" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="profitTarget2">Profit Target 2 (%):</label>
+                <input type="number" id="profitTarget2" value="25">
+            </div>
+            <div class="input-group">
+                <label for="priceTarget2">Price Target 2:</label>
+                <input type="number" id="priceTarget2" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="profitTarget3">Profit Target 3 (%):</label>
+                <input type="number" id="profitTarget3" value="20">
+            </div>
+            <div class="input-group">
+                <label for="priceTarget3">Price Target 3:</label>
+                <input type="number" id="priceTarget3" step="0.01">
+            </div>
+            <button onclick="calculateShares()">Calculate</button>
+            <div class="results">
+                <p id="result1"></p>
+                <p id="result2"></p>
+                <p id="result3"></p>
+                <p id="pnl1"></p>
+                <p id="pnl2"></p>
+                <p id="pnl3"></p>
+                <p id="totalPnl"></p>
+                <p id="stopLossResult"></p>
+                <p id="riskRewardRatio"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculateShares() {
+            const stopLoss = parseFloat(document.getElementById('stopLoss').value);
+            const buyPrice = parseFloat(document.getElementById('buyPrice').value);
+            const numberOfShares = parseInt(document.getElementById('numberOfShares').value);
+            const profitTarget1 = parseFloat(document.getElementById('profitTarget1').value) / 100;
+            const priceTarget1 = parseFloat(document.getElementById('priceTarget1').value);
+            const profitTarget2 = parseFloat(document.getElementById('profitTarget2').value) / 100;
+            const priceTarget2 = parseFloat(document.getElementById('priceTarget2').value);
+            const profitTarget3 = parseFloat(document.getElementById('profitTarget3').value) / 100;
+            const priceTarget3 = parseFloat(document.getElementById('priceTarget3').value);
+
+            if (isNaN(stopLoss) || isNaN(buyPrice) || isNaN(numberOfShares) || isNaN(profitTarget1) || isNaN(priceTarget1) || isNaN(profitTarget2) || isNaN(priceTarget2) || isNaN(profitTarget3) || isNaN(priceTarget3)) {
+                return;
+            }
+
+            const sharesToSell1 = numberOfShares * profitTarget1;
+            const sharesToSell2 = numberOfShares * profitTarget2;
+            const sharesToSell3 = numberOfShares * profitTarget3;
+
+            const pnl1 = (priceTarget1 - buyPrice) * sharesToSell1;
+            const pnl2 = (priceTarget2 - buyPrice) * sharesToSell2;
+            const pnl3 = (priceTarget3 - buyPrice) * sharesToSell3;
+
+            const totalPnl = pnl1 + pnl2 + pnl3;
+
+            const stopLossAmount = (buyPrice - stopLoss) * numberOfShares;
+
+            const riskRewardRatio = totalPnl / Math.abs(stopLossAmount);
+
+            document.getElementById('result1').innerText = `Sell ${sharesToSell1.toFixed(2)} shares for ${profitTarget1 * 100}% profit target at $${priceTarget1.toFixed(2)}.`;
+            document.getElementById('result2').innerText = `Sell ${sharesToSell2.toFixed(2)} shares for ${profitTarget2 * 100}% profit target at $${priceTarget2.toFixed(2)}.`;
+            document.getElementById('result3').innerText = `Sell ${sharesToSell3.toFixed(2)} shares for ${profitTarget3 * 100}% profit target at $${priceTarget3.toFixed(2)}.`;
+            document.getElementById('pnl1').innerText = `PnL for Profit Target 1: $${pnl1.toFixed(2)}`;
+            document.getElementById('pnl2').innerText = `PnL for Profit Target 2: $${pnl2.toFixed(2)}`;
+            document.getElementById('pnl3').innerText = `PnL for Profit Target 3: $${pnl3.toFixed(2)}`;
+            document.getElementById('totalPnl').innerText = `Total PnL: $${totalPnl.toFixed(2)}`;
+            document.getElementById('stopLossResult').innerText = `Loss if Stop Loss is Hit: $${stopLossAmount.toFixed(2)}`;
+            document.getElementById('riskRewardRatio').innerText = `Risk-Reward Ratio: ${riskRewardRatio.toFixed(2)}`;
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculateShares);
+        });
+    </script>
+</body>
+</html>
