@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share Calculator</title>
+    <title>Scale Out Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,7 +77,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Average Share Price Calculation</h1>
+        <h1>Scale Out Calculator</h1>
         <div class="calculator">
             <div class="input-group">
                 <label for="buyPrice">Buy Price:</label>
@@ -92,18 +92,33 @@
                 <input type="number" id="profitTarget1" value="30">
             </div>
             <div class="input-group">
+                <label for="priceTarget1">Price Target 1:</label>
+                <input type="number" id="priceTarget1" step="0.01">
+            </div>
+            <div class="input-group">
                 <label for="profitTarget2">Profit Target 2 (%):</label>
                 <input type="number" id="profitTarget2" value="25">
             </div>
             <div class="input-group">
+                <label for="priceTarget2">Price Target 2:</label>
+                <input type="number" id="priceTarget2" step="0.01">
+            </div>
+            <div class="input-group">
                 <label for="profitTarget3">Profit Target 3 (%):</label>
                 <input type="number" id="profitTarget3" value="20">
+            </div>
+            <div class="input-group">
+                <label for="priceTarget3">Price Target 3:</label>
+                <input type="number" id="priceTarget3" step="0.01">
             </div>
             <button onclick="calculateShares()">Calculate</button>
             <div class="results">
                 <p id="result1"></p>
                 <p id="result2"></p>
                 <p id="result3"></p>
+                <p id="pnl1"></p>
+                <p id="pnl2"></p>
+                <p id="pnl3"></p>
             </div>
         </div>
     </div>
@@ -112,10 +127,13 @@
             const buyPrice = parseFloat(document.getElementById('buyPrice').value);
             const numberOfShares = parseInt(document.getElementById('numberOfShares').value);
             const profitTarget1 = parseFloat(document.getElementById('profitTarget1').value) / 100;
+            const priceTarget1 = parseFloat(document.getElementById('priceTarget1').value);
             const profitTarget2 = parseFloat(document.getElementById('profitTarget2').value) / 100;
+            const priceTarget2 = parseFloat(document.getElementById('priceTarget2').value);
             const profitTarget3 = parseFloat(document.getElementById('profitTarget3').value) / 100;
+            const priceTarget3 = parseFloat(document.getElementById('priceTarget3').value);
 
-            if (isNaN(buyPrice) || isNaN(numberOfShares) || isNaN(profitTarget1) || isNaN(profitTarget2) || isNaN(profitTarget3)) {
+            if (isNaN(buyPrice) || isNaN(numberOfShares) || isNaN(profitTarget1) || isNaN(priceTarget1) || isNaN(profitTarget2) || isNaN(priceTarget2) || isNaN(profitTarget3) || isNaN(priceTarget3)) {
                 alert("Please enter valid numbers in all fields.");
                 return;
             }
@@ -124,17 +142,17 @@
             const sharesToSell2 = numberOfShares * profitTarget2;
             const sharesToSell3 = numberOfShares * profitTarget3;
 
-            document.getElementById('result1').innerText = `Sell ${sharesToSell1.toFixed(2)} shares for ${profitTarget1 * 100}% profit target.`;
-            document.getElementById('result2').innerText = `Sell ${sharesToSell2.toFixed(2)} shares for ${profitTarget2 * 100}% profit target.`;
-            document.getElementById('result3').innerText = `Sell ${sharesToSell3.toFixed(2)} shares for ${profitTarget3 * 100}% profit target.`;
-        }
+            const pnl1 = (priceTarget1 - buyPrice) * sharesToSell1;
+            const pnl2 = (priceTarget2 - buyPrice) * sharesToSell2;
+            const pnl3 = (priceTarget3 - buyPrice) * sharesToSell3;
 
-        // Event listeners to recalculate when input changes
-        document.getElementById('buyPrice').addEventListener('input', calculateShares);
-        document.getElementById('numberOfShares').addEventListener('input', calculateShares);
-        document.getElementById('profitTarget1').addEventListener('input', calculateShares);
-        document.getElementById('profitTarget2').addEventListener('input', calculateShares);
-        document.getElementById('profitTarget3').addEventListener('input', calculateShares);
+            document.getElementById('result1').innerText = `Sell ${sharesToSell1.toFixed(2)} shares for ${profitTarget1 * 100}% profit target at $${priceTarget1.toFixed(2)}.`;
+            document.getElementById('result2').innerText = `Sell ${sharesToSell2.toFixed(2)} shares for ${profitTarget2 * 100}% profit target at $${priceTarget2.toFixed(2)}.`;
+            document.getElementById('result3').innerText = `Sell ${sharesToSell3.toFixed(2)} shares for ${profitTarget3 * 100}% profit target at $${priceTarget3.toFixed(2)}.`;
+            document.getElementById('pnl1').innerText = `PnL for Profit Target 1: $${pnl1.toFixed(2)}`;
+            document.getElementById('pnl2').innerText = `PnL for Profit Target 2: $${pnl2.toFixed(2)}`;
+            document.getElementById('pnl3').innerText = `PnL for Profit Target 3: $${pnl3.toFixed(2)}`;
+        }
     </script>
 </body>
 </html>
