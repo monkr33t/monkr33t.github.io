@@ -56,6 +56,7 @@
             margin-top: 20px;
             font-size: 18px;
             font-weight: bold;
+            text-align: left;
         }
     </style>
 </head>
@@ -65,29 +66,43 @@
         <label for="income">Enter your annual income:</label>
         <input type="number" id="income" name="income">
         <button onclick="calculateTax()">Calculate Tax</button>
-        <p id="result"></p>
+        <div id="result"></div>
     </div>
     <script>
         function calculateTax() {
             const income = document.getElementById('income').value;
-            let tax = 0;
             const taxFreeThreshold = 18200;
             const lowerBracketThreshold = 45000;
             const upperBracketThreshold = 135000;
             const lowerBracketRate = 0.16;
             const upperBracketRate = 0.30;
 
+            let tax = 0;
+            let taxOnFirstBracket = 0;
+            let taxOnSecondBracket = 0;
+            let taxOnThirdBracket = 0;
+
             if (income <= taxFreeThreshold) {
                 tax = 0;
             } else if (income <= lowerBracketThreshold) {
-                tax = (income - taxFreeThreshold) * lowerBracketRate;
+                taxOnSecondBracket = (income - taxFreeThreshold) * lowerBracketRate;
+                tax = taxOnSecondBracket;
             } else if (income <= upperBracketThreshold) {
-                tax = (lowerBracketThreshold - taxFreeThreshold) * lowerBracketRate + (income - lowerBracketThreshold) * upperBracketRate;
+                taxOnSecondBracket = (lowerBracketThreshold - taxFreeThreshold) * lowerBracketRate;
+                taxOnThirdBracket = (income - lowerBracketThreshold) * upperBracketRate;
+                tax = taxOnSecondBracket + taxOnThirdBracket;
             } else {
-                tax = (lowerBracketThreshold - taxFreeThreshold) * lowerBracketRate + (upperBracketThreshold - lowerBracketThreshold) * upperBracketRate;
+                taxOnSecondBracket = (lowerBracketThreshold - taxFreeThreshold) * lowerBracketRate;
+                taxOnThirdBracket = (upperBracketThreshold - lowerBracketThreshold) * upperBracketRate;
+                tax = taxOnSecondBracket + taxOnThirdBracket;
             }
 
-            document.getElementById('result').innerText = `Your tax is $${tax.toFixed(2)}`;
+            document.getElementById('result').innerHTML = `
+                <p>$18,200 = $0 tax owed</p>
+                <p>$18,201 to $45,000 = $${taxOnSecondBracket.toFixed(2)}</p>
+                <p>$45,001 to $135,000 = $${taxOnThirdBracket.toFixed(2)}</p>
+                <p><strong>Total tax liability = $${tax.toFixed(2)}</strong></p>
+            `;
         }
     </script>
 </body>
