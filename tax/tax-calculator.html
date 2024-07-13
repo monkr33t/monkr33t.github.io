@@ -70,7 +70,7 @@
     </div>
     <script>
         function calculateTax() {
-            const income = document.getElementById('income').value;
+            const income = parseFloat(document.getElementById('income').value);
             const taxFreeThreshold = 18200;
             const lowerBracketThreshold = 45000;
             const upperBracketThreshold = 135000;
@@ -94,7 +94,8 @@
             } else {
                 taxOnSecondBracket = (lowerBracketThreshold - taxFreeThreshold) * lowerBracketRate;
                 taxOnThirdBracket = (upperBracketThreshold - lowerBracketThreshold) * upperBracketRate;
-                tax = taxOnSecondBracket + taxOnThirdBracket;
+                const taxOnRemaining = (income - upperBracketThreshold) * upperBracketRate;
+                tax = taxOnSecondBracket + taxOnThirdBracket + taxOnRemaining;
             }
 
             document.getElementById('result').innerHTML = `
