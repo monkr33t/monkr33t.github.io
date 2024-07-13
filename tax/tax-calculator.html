@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Tax Calculator</h1>
+        <label for="income">Enter your annual income:</label>
+        <input type="number" id="income" name="income">
+        <button onclick="calculateTax()">Calculate Tax</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        function calculateTax() {
+            const income = document.getElementById('income').value;
+            let tax = 0;
+            const taxFreeThreshold = 18200;
+            const lowerBracketThreshold = 45000;
+            const upperBracketThreshold = 135000;
+            const lowerBracketRate = 0.16;
+            const upperBracketRate = 0.30;
+
+            if (income <= taxFreeThreshold) {
+                tax = 0;
+            } else if (income <= lowerBracketThreshold) {
+                tax = (income - taxFreeThreshold) * lowerBracketRate;
+            } else if (income <= upperBracketThreshold) {
+                tax = (lowerBracketThreshold - taxFreeThreshold) * lowerBracketRate + (income - lowerBracketThreshold) * upperBracketRate;
+            } else {
+                tax = (lowerBracketThreshold - taxFreeThreshold) * lowerBracketRate + (upperBracketThreshold - lowerBracketThreshold) * upperBracketRate;
+            }
+
+            document.getElementById('result').innerText = `Your tax is $${tax.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
