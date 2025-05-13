@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Quotes Ticker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff; /* White background */
+        }
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: #333; /* Black background for the ticker */
+            color: #fff;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 10px 0;
+            animation: ticker 90s linear infinite;
+        }
+        .ticker div {
+            display: inline-block;
+            padding: 0 50px;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div>"The stock market is a device for transferring money from the impatient to the patient."— Warren Buffett</div>
+            <div>"Our favorite holding period is forever."— Warren Buffett</div>
+            <div>"Time in the market beats timing the market."— Ken Fisher</div>
+            <div>"The individual investor should act consistently as an investor and not as a speculator."— Benjamin Graham</div>
+            <div>"The four most dangerous words in investing are: ‘This time it’s different.’"— Sir John Templeton</div>
+            <div>"Know what you own, and know why you own it."— Peter Lynch</div>
+            <div>"Compound interest is the eighth wonder of the world. He who understands it, earns it… he who doesn’t, pays it."— Attributed to Albert Einstein</div>
+            <div>"The best time to plant a tree was 20 years ago. The second-best time is now."— Chinese Proverb</div>
+            <div>"In the short run, the market is a voting machine. But in the long run, it is a weighing machine."— Benjamin Graham</div>
+            <div>"Be fearful when others are greedy, and greedy when others are fearful."— Warren Buffett</div>
+            <div>"The goal of the non-professional should not be to pick winners — neither he nor his ‘helpers’ can do that — but should rather be to own a cross-section of businesses that in aggregate are bound to do well." — Warren Buffett</div>
+            <div>"Investing should be more like watching paint dry or watching grass grow. If you want excitement, take $800 and go to Las Vegas." — Paul Samuelson</div>
+            <div>"You make most of your money in a bear market, you just don’t realize it at the time." — Shelby M.C. Davis</div>
+            <div>"The intelligent investor is a realist who sells to optimists and buys from pessimists." — Benjamin Graham</div>
+            <div>"An investment in knowledge pays the best interest." — Benjamin Franklin</div>
+            <div>"The most important quality for an investor is temperament, not intellect." — Warren Buffett</div>
+            <div>"Patience is the key to success in the market." — Charlie Munger</div>
+            <div>"To succeed in investing, you must have a long-term perspective." — John Bogle</div>
+            <div>"Index funds eliminate the risks of individual stocks, market timing, and other traps that undermine investor returns." — Burton G. Malkiel</div>
+            <div>"The function of economic forecasting is to make astrology look respectable." — John Kenneth Galbraith</div>
+            <div>"Bull markets are born on pessimism, grow on skepticism, mature on optimism, and die on euphoria." — Sir John Templeton</div>
+            <div>"Do not save what is left after spending, but spend what is left after saving." - Warren Buffett</div>
+            <div>"The habit of saving is itself an education; it fosters every virtue, teaches self-denial, cultivates the sense of order, trains to forethought, and so broadens the mind." - T.T. Munger</div>
+            <div>"A penny saved is a penny earned." - Benjamin Franklin</div>
+            <div>"Financial freedom is available to those who learn about it and work for it." - Robert Kiyosaki</div>
+            <div>"Savings, remember, is the prerequisite of investment." - Campbell McConnell</div>
+            <div>"The best time to start thinking about your retirement is before the boss does." - Anonymous</div>
+            <div>"It’s not about having lots of money. It’s knowing how to manage it." - Anonymous</div>
+            <div>"Do something today that your future self will thank you for." - Sean Patrick Flanery</div>
+        </div>
+    </div>
+</body>
+</html>
